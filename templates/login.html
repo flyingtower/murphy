@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="zh_CN"><![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="zh_CN"><![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9" lang="zh_CN"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="zh_CN">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/x-icon" href=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="stylesheet" type="text/css" charset="utf-8"
+          href="//static.qiushibaike.com/css/dist/thirdLogin/app.css"/>
+    <title>糗百登录</title>
+</head>
+<body>
+<!-- 所有内容都要套在main里面 -->
+<div class='main'>
+    <div class="loginPage" id="loginPage">
+        <div class="logo"><img
+                src="//static.qiushibaike.com/images/thirdLogin/qiubai_login_logo.png?v=ae67aa6802893016271c982e558a7574"
+                alt="糗事百科logo"/></div>
+        <div class="loginWrapper clearfix">
+            <form class="clearfix" role="form" action="/login/dologin" method="post">
+                <p class="instruction">密码默认是账号的拼音首字母小写</p>
+                <div class="loginInner">
+                    <div class="loginBox">
+                        <label>姓名：</label><input type="text" name="userName" class="input account"
+                                                 placeholder=""/>
+                    </div>
+                    <div class="loginBox">
+                        <label>密码：</label><input type="password" name="password" class="input password"
+                                                 placeholder="默认拼音首字母小写"/>
+                    </div>
+                </div>
+                <div class="handle">
+                    <input class="confirm" type="submit" value="登录"/>
+                    <div class="cancle">取消</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        var confirm = $('.confirm'),
+            cancle = $('.cancle');
+        confirm.on('click', function () {
+            var account = $('.account').val(),
+                password = $('.password').val()
+            $('#signin-error').text('').hide()
+            if (account == '') {
+                $('#signin-error').text('请输入糗事百科账号').show()
+                return false
+            } else if (password == '') {
+                $('#signin-error').text('请输入密码').show()
+                return false
+            }
+        })
+        cancle.on('click', function () {
+            window.history.go(-1)
+        })
+    })
+</script>
+</html>
