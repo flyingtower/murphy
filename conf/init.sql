@@ -13,7 +13,16 @@ CREATE TABLE `base_user` (
   UNIQUE KEY `idx_user_name` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO base_user(create_at,modify_at,user_name,password,token,depart) VALUES (now(),now(),'ft','123','','工商局');
+insert into base_user(user_name,password,token,depart) values('廖宸一','lcy','','推广中心');
+insert into base_user(user_name,password,token,depart) values('贾唯','jw','','推广中心');
+insert into base_user(user_name,password,token,depart) values('钟彬礼','zbl','','推广中心');
+insert into base_user(user_name,password,token,depart) values('张蕾','','zl','推广中心');
+insert into base_user(user_name,password,token,depart) values('周昕毅','zxy','','推广中心');
+insert into base_user(user_name,password,token,depart) values('周幸','zx','','推广中心');
+insert into base_user(user_name,password,token,depart) values('黄柏豪','zbh','','推广中心');
+insert into base_user(user_name,password,token,depart) values('闫俊','yj','','推广中心');
+insert into base_user(user_name,password,token,depart) values('杨晶','yj','','推广中心');
+insert into base_user(user_name,password,token,depart) values('梁伟乐','lwl','','推广中心');
 
 CREATE TABLE `daily_report` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',

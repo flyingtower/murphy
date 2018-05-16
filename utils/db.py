@@ -214,5 +214,5 @@ for field_type in field_types:
 IntegrityError = MySQLdb.IntegrityError
 OperationalError = MySQLdb.OperationalError
 
-mydb = Connection(host="10.251.168.55:3306", user="remix", password="kY,nh9tBo3pR", database="murphy")
-mydb.execute("SET NAMES utf8mb4")
+mydb = Connection(host="192.168.0.102:3306", user="murphy", password="123", database="murphy")
+mydb.execute("SET NAMES utf8")
