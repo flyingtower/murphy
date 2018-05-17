@@ -23,3 +23,25 @@ class DailyReportInputHandler(BaseHandler):
         extra = self.get_argument("extra")
         msg = DailyReportService.submitDailyReport(self.user_id,desc,extra)
         return None,{"msg":msg},0
+
+class DailyReportDownloadHandler(BaseHandler):
+    @check_user_login(isJson=True)
+    def get(self):
+        DailyReportService.generateGroupDailyReport()
+
+        if filename and len(filename) > 0:
+            self.set_header('Content-Type', 'application/force-download')
+            self.set_header('Content-Disposition', 'attachment; filename=' + filename)
+            buf_size = 4096
+            with open(filename, 'rb') as f:
+                while True:
+                    data = f.read(buf_size)
+                    if not data:
+                        break
+                    self.write(data)
+            self.finish()
+            print "删除" + filename
+            os.remove(filename)
+        return None,None,0
+
+

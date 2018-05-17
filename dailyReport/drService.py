@@ -2,7 +2,8 @@
 
 from utils.db import mydb
 import datetime
-
+import os
+import csv
 
 class DailyReportService():
 
@@ -25,3 +26,19 @@ class DailyReportService():
         except Exception as e:
             return "提交失败:" + str(e.message)
         return "提交"+todayStr+"的日报成功"
+
+    @staticmethod
+    def generateGroupDailyReport():
+        dateStr = datetime.datetime.now().strftime("%Y-%m-%d")
+        file_path = "/tmp"
+        shortName = "dailyReport" + dateStr + ".csv"
+        filename = os.path.join(file_path, shortName)
+        dst_file = file(filename, 'wb')
+        writer = csv.writer(dst_file)
+        title_arr = ["日期", "姓名", "部门", "本日工作内容", "遇到的问题"]
+        writer.writerow(title_arr)
+        dailyRes = DailyReportService.getAllDailyReport(dateStr)
+        for tmp in dailyRes:
+            writer.writerow([dateStr, tmp["user_name"], tmp["depart"], tmp["content"], tmp["extra"]])
+        dst_file.close()
+

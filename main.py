@@ -13,6 +13,7 @@ class Application(tornado.web.Application):
             (r"/", DailyReportHandler),
             (r"/dr/input/view", DailyReportInputHandler),
             (r"/dr/input/submit", DailyReportInputHandler),
+            (r"/dr/download", DailyReportDownloadHandler),
             (LOGIN_URL, LoginHandler),
             ("/login/dologin", LoginHandler),
         ]

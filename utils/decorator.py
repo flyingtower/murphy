@@ -23,19 +23,21 @@ def check_user_login(isJson=False):
             ins.user_id=user_id
 
             htmlpath, datas, err_code = func(ins, *args, **kwargs)
-            rep = dict()
-            if err_code != 0:
-                if not rep.has_key('err_msg'):
-                    rep['err_msg'] = ERR_MSG[err_code]
-                if datas:
-                    for key, values in datas.iteritems():
-                        rep[key] = values
+            if type(datas)=="dict":
+                rep = dict()
+                if err_code != 0:
+                    if not datas.has_key('err_msg'):
+                        rep['err_msg'] = ERR_MSG[err_code]
+                    if datas:
+                        for key, values in datas.iteritems():
+                            rep[key] = values
+                else:
+                    if datas:
+                        for key, values in datas.iteritems():
+                            rep[key] = values
+                rep['err'] = err_code
             else:
-                if datas:
-                    for key, values in datas.iteritems():
-                        rep[key] = values
-
-            rep['err'] = err_code
+                rep = datas
             if isJson:
                 ins.write(rep)
             else:
