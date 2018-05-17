@@ -39,6 +39,8 @@ class DailyReportService():
         writer.writerow(title_arr)
         dailyRes = DailyReportService.getAllDailyReport(dateStr)
         for tmp in dailyRes:
-            writer.writerow([dateStr, tmp["user_name"], tmp["depart"], tmp["content"], tmp["extra"]])
+            writer.writerow(
+                [dateStr, tmp["user_name"].encode("utf8"), tmp["depart"].encode("utf8"), tmp["content"].encode("utf8"),
+                 tmp["extra"].encode("utf8")])
         dst_file.close()
-
+        return filename

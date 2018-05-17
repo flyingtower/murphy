@@ -27,8 +27,7 @@ class DailyReportInputHandler(BaseHandler):
 class DailyReportDownloadHandler(BaseHandler):
     @check_user_login(isJson=True)
     def get(self):
-        DailyReportService.generateGroupDailyReport()
-
+        filename = DailyReportService.generateGroupDailyReport()
         if filename and len(filename) > 0:
             self.set_header('Content-Type', 'application/force-download')
             self.set_header('Content-Disposition', 'attachment; filename=' + filename)
@@ -39,9 +38,7 @@ class DailyReportDownloadHandler(BaseHandler):
                     if not data:
                         break
                     self.write(data)
-            self.finish()
-            print "删除" + filename
-            os.remove(filename)
+        self.finish()
         return None,None,0
 
 
