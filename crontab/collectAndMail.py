@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append("..")
+
 from email.header import Header
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -21,7 +24,7 @@ title_arr = ["日期","姓名","部门","本日工作内容","遇到的问题"]
 writer.writerow(title_arr)
 dailyRes = DailyReportService.getAllDailyReport(dateStr)
 for tmp in dailyRes:
-    writer.writerow([dateStr,tmp["user_name"],tmp["depart"],tmp["content"],tmp["extra"]])
+    writer.writerow([dateStr,tmp["user_name"].encode("utf8"),tmp["depart"].encode("utf8"),tmp["content"].encode("utf8"),tmp["extra"].encode("utf8")])
 
 dst_file.close()
 
@@ -33,7 +36,7 @@ def _format_addr(s):
 
 from_addr = '2562227696@qq.com'
 password = "znpgltztisjsebhe"
-to_addr = '2562227696@qq.com'
+to_addr = '635642044@qq.com'
 smtp_server = "smtp.qq.com"
 
 msg = MIMEMultipart()
