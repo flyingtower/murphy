@@ -17,12 +17,14 @@ class DailyReportInputHandler(BaseHandler):
     def get(self):
         return "../templates/dailyReportInput.html",None,0
 
-    @check_user_login(isJson=True)
+    @check_user_login(isJson=False, redirect=True)
     def post(self):
         desc = self.get_argument("desc")
         extra = self.get_argument("extra")
-        msg = DailyReportService.submitDailyReport(self.user_id,desc,extra)
-        return None,{"msg":msg},0
+        msg,success = DailyReportService.submitDailyReport(self.user_id,desc,extra)
+        if success:
+            return "/",None,None
+        self.commonError(msg)
 
 class DailyReportDownloadHandler(BaseHandler):
     @check_user_login(isJson=True)

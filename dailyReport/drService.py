@@ -18,14 +18,16 @@ class DailyReportService():
 
     @staticmethod
     def submitDailyReport(user_id, content, extra):
+        if not content:
+            return "提交失败: 日报不能为空",False
         try:
             todayStr = datetime.datetime.now().strftime("%Y-%m-%d")
             mydb.execute(
                 "INSERT INTO daily_report(daily_date,user_id,content,extra) VALUES (%s,%s,%s,%s) ON DUPLICATE KEY UPDATE content=%s,extra=%s",
                 todayStr, user_id, content, extra, content, extra)
         except Exception as e:
-            return "提交失败:" + str(e.message)
-        return "提交"+todayStr+"的日报成功"
+            return "提交失败:" + str(e.message),False
+        return "提交"+todayStr+"的日报成功",True
 
     @staticmethod
     def generateGroupDailyReport():

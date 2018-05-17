@@ -8,7 +8,7 @@ ERR_MSG = {
     -401: "登录过期,请重新登录",
 }
 
-def check_user_login(isJson=False,autoRes=True):
+def check_user_login(isJson=False,autoRes=True, redirect=False):
     def _(func):
         @wraps(func)
         def __(ins, *args, **kwargs):
@@ -42,7 +42,9 @@ def check_user_login(isJson=False,autoRes=True):
                 rep = datas
             if isJson:
                 ins.write(rep)
-            else:
+            elif redirect:
+                ins.redirect(htmlpath)
+            elif htmlpath:
                 ins.render(htmlpath,data=rep)
         return __
     return _
