@@ -40,9 +40,9 @@ to_addr = '635642044@qq.com'
 smtp_server = "smtp.qq.com"
 
 msg = MIMEMultipart()
-msg['From'] = _format_addr(u'Python爱好者 <%s>' % from_addr)
-msg['To'] = _format_addr(u'管理员 <%s>' % to_addr)
-msg['Subject'] = Header(u'来自SMTP的问候……', 'utf-8').encode()
+msg['From'] = _format_addr(u'廖宸一<%s>' % from_addr)
+msg['To'] = _format_addr(u'<%s>' % to_addr)
+msg['Subject'] = Header(u'日报汇总%s' % dateStr, 'utf-8').encode()
 
 # 邮件正文是MIMEText:
 msg.attach(MIMEText('send with file...', 'plain', 'utf-8'))
